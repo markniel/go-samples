@@ -2,11 +2,15 @@ package go_samples
 
 import (
 	"encoding/json"
-	"fmt"
 )
 
 type Configuration struct {
 	LogLevel int
+}
+
+func (c *Configuration) String() string {
+	config, _ := json.MarshalIndent(c, "", "  ")
+	return string(config)
 }
 
 func getConfiguration(filename string) (Configuration, error) {
@@ -22,9 +26,4 @@ func getConfiguration(filename string) (Configuration, error) {
 			return config, nil
 		}
 	}
-}
-
-func printConfiguration(config Configuration) {
-	configJson, _ := json.MarshalIndent(config, "", "  ")
-	fmt.Printf("Configuration:\n %s\n", string(configJson))
 }
